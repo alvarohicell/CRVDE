@@ -1,0 +1,1080 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CRVDE — Official Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #f4f2ed;
+      color: #111;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 22px 5%;
+
+      background: rgba(244, 242, 237, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 35px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 0.5;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      font-size: 19px;
+    }
+
+    .header-icons button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 19px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 140px 5% 70px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.05),
+          rgba(0,0,0,0.55)
+        ),
+        url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=90");
+
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero-small {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(70px, 13vw, 180px);
+      line-height: 0.8;
+      letter-spacing: -9px;
+      font-weight: 900;
+    }
+
+    .hero p {
+      margin-top: 30px;
+      font-size: 15px;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    .hero-button {
+      display: inline-block;
+      margin-top: 30px;
+
+      padding: 15px 28px;
+
+      background: white;
+      color: black;
+
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+
+      transition: 0.25s;
+    }
+
+    .hero-button:hover {
+      background: #111;
+      color: white;
+    }
+
+    /* =========================
+       MARQUEE
+    ========================= */
+
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+
+      background: #111;
+      color: white;
+
+      padding: 18px 0;
+
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 18s linear infinite;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* =========================
+       COLLECTION
+    ========================= */
+
+    .section {
+      padding: 110px 5%;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      margin-bottom: 45px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(40px, 6vw, 75px);
+      letter-spacing: -4px;
+      line-height: 0.9;
+    }
+
+    .section-header span {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================= */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .product-image {
+      height: 480px;
+
+      background: #dedbd4;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 0.5s;
+    }
+
+    .product:hover img {
+      transform: scale(1.04);
+    }
+
+    .limited {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+
+      background: #111;
+      color: white;
+
+      padding: 7px 10px;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: 1px;
+    }
+
+    .product-info {
+      padding: 15px 2px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .product-edition {
+      margin-top: 5px;
+
+      color: #777;
+
+      font-size: 11px;
+    }
+
+    .product-price {
+      margin-top: 8px;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       MANIFESTO
+    ========================= */
+
+    .manifesto {
+      min-height: 75vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #111;
+      color: white;
+
+      text-align: center;
+
+      padding: 80px 10%;
+    }
+
+    .manifesto-inner {
+      max-width: 1000px;
+    }
+
+    .manifesto-small {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 35px;
+    }
+
+    .manifesto h2 {
+      font-size: clamp(45px, 7vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+    }
+
+    .manifesto p {
+      max-width: 550px;
+      margin: 35px auto 0;
+
+      font-size: 14px;
+      line-height: 1.7;
+
+      color: #aaa;
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      height: 550px;
+
+      position: relative;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 30px;
+
+      color: white;
+
+      overflow: hidden;
+    }
+
+    .category::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background-size: cover;
+      background-position: center;
+
+      transition: transform 0.6s;
+      z-index: 0;
+    }
+
+    .category:hover::before {
+      transform: scale(1.05);
+    }
+
+    .category:nth-child(1)::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .category:nth-child(2)::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .category:nth-child(3)::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .category-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .category h3 {
+      font-size: 42px;
+      letter-spacing: -2px;
+    }
+
+    .category span {
+      display: inline-block;
+      margin-top: 8px;
+
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       NEWSLETTER
+    ========================= */
+
+    .newsletter {
+      padding: 120px 5%;
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      font-size: clamp(45px, 7vw, 90px);
+      letter-spacing: -5px;
+      line-height: 0.9;
+    }
+
+    .newsletter p {
+      margin: 25px auto;
+
+      max-width: 450px;
+
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      max-width: 500px;
+      margin: 35px auto;
+
+      display: flex;
+
+      border-bottom: 1px solid #111;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      padding: 15px 0;
+
+      font-size: 13px;
+    }
+
+    .newsletter-form button {
+      border: none;
+      background: none;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #111;
+      color: white;
+
+      padding: 70px 5% 30px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+
+      gap: 40px;
+    }
+
+    .footer-logo {
+      font-size: 55px;
+      font-weight: 900;
+      letter-spacing: -5px;
+    }
+
+    footer h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+      color: #777;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    footer li a:hover {
+      opacity: 0.5;
+    }
+
+    .copyright {
+      margin-top: 80px;
+
+      padding-top: 20px;
+
+      border-top: 1px solid #333;
+
+      color: #666;
+
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      nav {
+        display: none;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-image {
+        height: 400px;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        height: 500px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .hero {
+        min-height: 90vh;
+        padding-bottom: 45px;
+      }
+
+      .hero h1 {
+        letter-spacing: -5px;
+      }
+
+      .section {
+        padding: 75px 5%;
+      }
+
+      .products {
+        gap: 10px;
+      }
+
+      .product-image {
+        height: 300px;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-header span {
+        display: block;
+        margin-top: 15px;
+      }
+
+      .manifesto {
+        min-height: 60vh;
+      }
+
+      .manifesto h2 {
+        letter-spacing: -3px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-logo {
+        margin-bottom: 30px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+
+    <a href="#" class="logo">CRVDE</a>
+
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#collections">Collections</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-icons">
+      <button onclick="alert('Buscador próximamente')">⌕</button>
+      <button onclick="alert('Carrito próximamente')">🛒</button>
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-small">
+        CRVDE / DROP 001
+      </div>
+
+      <h1>CRVDE</h1>
+
+      <p>
+        Built different.  
+        Designed without rules.
+      </p>
+
+      <a href="#shop" class="hero-button">
+        Shop the drop
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MARQUEE
+  ========================= -->
+
+  <div class="marquee">
+
+    <div class="marquee-track">
+
+      CRVDE — EST. 2026 — LIMITED EDITIONS —
+      CRVDE — EST. 2026 — LIMITED EDITIONS —
+      CRVDE — EST. 2026 — LIMITED EDITIONS —
+      CRVDE — EST. 2026 — LIMITED EDITIONS —
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       PRODUCTS
+  ========================= -->
+
+  <section class="section" id="shop">
+
+    <div class="section-header">
+
+      <h2>THE DROP</h2>
+
+      <span>
+        01 / 04 — LIMITED COLLECTION
+      </span>
+
+    </div>
+
+
+    <div class="products">
+
+      <div class="product">
+
+        <div class="product-image">
+
+          <span class="limited">
+            LIMITED
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=85"
+            alt="CRVDE T-Shirt"
+          >
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-name">
+            CRVDE CORE TEE
+          </div>
+
+          <div class="product-edition">
+            Edition 001
+          </div>
+
+          <div class="product-price">
+            €39.90
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+
+          <span class="limited">
+            LIMITED
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1000&q=85"
+            alt="CRVDE Hoodie"
+          >
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-name">
+            CRVDE ARCHIVE HOODIE
+          </div>
+
+          <div class="product-edition">
+            Edition 002
+          </div>
+
+          <div class="product-price">
+            €69.90
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+
+          <span class="limited">
+            LIMITED
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85"
+            alt="CRVDE Oversized Tee"
+          >
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-name">
+            CRVDE FADED TEE
+          </div>
+
+          <div class="product-edition">
+            Edition 003
+          </div>
+
+          <div class="product-price">
+            €44.90
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+
+          <span class="limited">
+            LIMITED
+          </span>
+
+          <img
+            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=85"
+            alt="CRVDE Jacket"
+          >
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-name">
+            CRVDE WORK JACKET
+          </div>
+
+          <div class="product-edition">
+            Edition 004
+          </div>
+
+          <div class="product-price">
+            €89.90
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MANIFESTO
+  ========================= -->
+
+  <section class="manifesto" id="about">
+
+    <div class="manifesto-inner">
+
+      <div class="manifesto-small">
+        THE CRVDE PHILOSOPHY
+      </div>
+
+      <h2>
+        NOT MADE<br>
+        TO FIT IN.
+      </h2>
+
+      <p>
+        CRVDE is an independent clothing label built around
+        individuality, simplicity and limited pieces.
+        Every drop is created to feel different.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CATEGORIES
+  ========================= -->
+
+  <section class="section" id="collections">
+
+    <div class="section-header">
+
+      <h2>EXPLORE</h2>
+
+      <span>
+        SHOP BY CATEGORY
+      </span>
+
+    </div>
+
+
+    <div class="categories">
+
+      <a href="#shop" class="category">
+
+        <div class="category-content">
+
+          <h3>TEES</h3>
+
+          <span>
+            Explore T-Shirts →
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a href="#shop" class="category">
+
+        <div class="category-content">
+
+          <h3>HOODIES</h3>
+
+          <span>
+            Explore Hoodies →
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a href="#shop" class="category">
+
+        <div class="category-content">
+
+          <h3>BOTTOMS</h3>
+
+          <span>
+            Explore Pants →
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NEWSLETTER
+  ========================= -->
+
+  <section class="newsletter" id="contact">
+
+    <h2>
+      JOIN CRVDE.
+    </h2>
+
+    <p>
+      Be the first to know about upcoming drops,
+      limited editions and exclusive releases.
+    </p>
+
+    <form class="newsletter-form"
+      onsubmit="subscribe(event)">
+
+      <input
+        type="email"
+        placeholder="YOUR EMAIL"
+        required
+      >
+
+      <button type="submit">
+        JOIN →
+      </button>
+
+    </form>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div>
+
+        <div class="footer-logo">
+          CRVDE
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h4>Shop</h4>
+
+        <ul>
+          <li><a href="#shop">T-Shirts</a></li>
+          <li><a href="#shop">Hoodies</a></li>
+          <li><a href="#shop">Pants</a></li>
+          <li><a href="#shop">Accessories</a></li>
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>Information</h4>
+
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>Social</h4>
+
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 CRVDE — ALL RIGHTS RESERVED
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    function subscribe(event) {
+
+      event.preventDefault();
+
+      alert(
+        "Gracias por unirte a CRVDE. Próximamente recibirás novedades."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
+
