@@ -209,6 +209,23 @@
     .about h2 { font-size: 36px; line-height: 1.1; margin: 16px 0; }
     .about p { color: #aaa; font-size: 13px; max-width: 400px; margin-bottom: 23px; }
 
+    .contact {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 60px;
+      border-top: 1px solid var(--line);
+    }
+    .contact h2 { font-size: 36px; line-height: 1.1; margin: 16px 0; }
+    .contact-copy > p:not(.eyebrow) { color: #aaa; font-size: 13px; max-width: 380px; }
+    .contact-details { display: grid; gap: 18px; margin-top: 32px; }
+    .contact-details span { display: block; color: var(--muted); font-size: 10px; letter-spacing: 1px; margin-bottom: 4px; }
+    .contact-details a, .contact-details p { font-size: 13px; }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .contact-form label { font-size: 10px; letter-spacing: 1px; }
+    .contact-form .form-input { margin: 8px 0 0; }
+    .contact-form .message-field, .contact-form .full { grid-column: 1 / -1; }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+
     footer {
       border-top: 1px solid var(--line);
       padding: 40px 6%;
@@ -299,6 +316,8 @@
       .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 23px 12px; }
       .about { grid-template-columns: 1fr; gap: 25px; }
       .about h2 { font-size: 31px; }
+      .contact { grid-template-columns: 1fr; gap: 32px; }
+      .contact h2 { font-size: 31px; }
       .section-heading h2 { font-size: 23px; }
       footer { padding: 30px 5%; }
     }
@@ -317,9 +336,10 @@
   <header>
     <a class="logo" href="#inicio" aria-label="CRVDE inicio">CRVDE</a>
     <nav aria-label="Navegación principal">
-      <a href="#inicio">Inicio</a>
+      <a href="#inicio">HOME</a>
       <a href="#tienda">Tienda</a>
       <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
     </nav>
     <div class="header-actions">
       <button onclick="openProfile()">Perfil</button>
@@ -375,6 +395,37 @@
         </p>
         <a class="button" href="#tienda">EXPLORAR CRVDE</a>
       </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div class="contact-copy">
+        <p class="eyebrow">HABLEMOS</p>
+        <h2>Estamos al otro lado.</h2>
+        <p>¿Dudas sobre una prenda, un pedido o una colaboración? Escríbenos y cuéntanos cómo podemos ayudarte.</p>
+        <div class="contact-details">
+          <div>
+            <span>EMAIL</span>
+            <a href="mailto:hola@crvde.com">hola@crvde.com</a>
+          </div>
+          <div>
+            <span>ATENCIÓN</span>
+            <p>Lunes a viernes · 10:00–18:00</p>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <label> NOMBRE
+          <input class="form-input" name="name" type="text" placeholder="Tu nombre" required>
+        </label>
+        <label> EMAIL
+          <input class="form-input" name="email" type="email" placeholder="tu@email.com" required>
+        </label>
+        <label class="message-field"> MENSAJE
+          <textarea class="form-input" name="message" placeholder="¿En qué podemos ayudarte?" required></textarea>
+        </label>
+        <button class="button full" type="submit">PREPARAR CORREO ↗</button>
+        <p class="notice message-field">El mensaje se abrirá en tu aplicación de correo. No se envía ni se almacena en esta página.</p>
+      </form>
     </section>
   </main>
 
@@ -635,6 +686,16 @@
     document.getElementById("profile-form").addEventListener("submit", event => {
       event.preventDefault();
       alert("Perfil de demostración: todavía no hay cuentas de usuario configuradas.");
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", event => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const subject = encodeURIComponent(`Consulta de ${formData.get("name")}`);
+      const body = encodeURIComponent(
+        `Nombre: ${formData.get("name")}\nEmail: ${formData.get("email")}\n\n${formData.get("message")}`
+      );
+      window.location.href = `mailto:hola@crvde.com?subject=${subject}&body=${body}`;
     });
 
     function closePanel(id) {
